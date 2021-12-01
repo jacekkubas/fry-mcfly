@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media screen and (max-width: 1000px){
+  @media screen and (max-width: 900px){
     height: 100vh;
     background: #000;
   }
@@ -18,8 +18,8 @@ export const Level = styled.div`
   width: 800px;
   max-width: 100%;
 
-  @media screen and (max-width: 1000px){
-    height: calc(100vh - 70px);
+  @media screen and (max-width: 900px){
+    height: 100vh;
   }
 `;
 
@@ -27,7 +27,7 @@ export const Img = styled.img`
   max-width: 100%;
   display: block;
 
-  @media screen and (max-width: 1000px){
+  @media screen and (max-width: 900px){
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -106,7 +106,7 @@ export const Btn = styled.div`
   box-sizing: border-box;
   ${({eat}) => eat ? 'left: 50%; transform: translateX(-50%);' : ''};
 
-  @media screen and (max-width: 1000px){
+  @media screen and (max-width: 900px){
     display: flex;
   }
 `;

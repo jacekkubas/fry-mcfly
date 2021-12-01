@@ -29,6 +29,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const RwdText = styled.span`
+  display: ${({mobile}) => mobile ? 'none' : 'inline-block'};
+
+  @media screen and (max-width: 1000px){
+    display: ${({mobile}) => mobile ? 'inline-block' : 'none'};
+  }
+`;
+
 const Start = ({setState}) => {
   const handleKeyDown = () => {
     setState('game');
@@ -45,8 +53,8 @@ const Start = ({setState}) => {
   return (
     <Wrapper onClick={() => {setState('game')}}>
       <div>
-        <h1>POO RIVALS</h1>
-        <h4>Click to start</h4>
+        <h1>Fry McFly</h1>
+        <h4><RwdText mobile>Tap</RwdText><RwdText>Press space</RwdText> to start</h4>
       </div>
     </Wrapper>
   )

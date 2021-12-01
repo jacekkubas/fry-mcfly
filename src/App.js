@@ -27,7 +27,7 @@ const App = () => {
       index: 2,
     },
     {
-      x: 77,
+      x: 74,
       y: 65,
       scale: 0.8,
       index: 3,
