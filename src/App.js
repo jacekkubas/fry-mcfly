@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
+      <div style={{width: '100%', height: '100%'}}>
         {state === 'start' && <Start setState={setState} />}
         {state === 'game' && <Game setState={setState} points={points} score={score} setScore={setScore} />}
         {state === 'end' && <End setState={setState} points={points} score={score} setScore={setScore} />}

@@ -3,7 +3,7 @@ import bg from '../assets/bg.png';
 import fly from '../assets/mucha.gif';
 import poo from '../assets/kupa.gif';
 import spider from '../assets/spider.gif';
-import {Wrapper, Level, Img, Point, Fly, Spider, Poo, Score, Timer} from './Styled';
+import {Wrapper, Level, Img, Point, Fly, Spider, Poo, Score, Timer, Btn} from './Styled';
 import useSound from 'use-sound';
 import coin from '../assets/sounds/coin.ogg';
 import mucha from '../assets/sounds/mucha2.ogg';
@@ -30,6 +30,11 @@ const Game = ({points, setState, score, setScore}) => {
   const [spiderSound] = useSound(spiderOgg, {interrupt: true, volume: 0.1});
 
   const handleEat = (exclude) => {
+    if (flyPlace.index === spiderPlace.index) {
+      handleSpiderEat();
+      return;
+    }
+    if (flyPlace.index !== pooPlace.index) return;
     const nextPooNumber = randomNumber(0, points.length - 1, exclude);
     const nextSpiderPlace = randomNumber(0, points.length - 1, nextPooNumber)
     
@@ -45,27 +50,31 @@ const Game = ({points, setState, score, setScore}) => {
     setState('end');
   }
 
+  const goLeft = (currentPlace) => {
+    muchaSound();
+    setFlyPlace({...points[currentPlace <= 0 ? points.length - 1 : currentPlace - 1]});
+  }
+
+  const goRight = (currentPlace) => {
+    muchaSound();
+    setFlyPlace({...points[(currentPlace + 1) >= points.length ? 0 : currentPlace + 1]});
+  }
+
   const handleKeyDown = (e) => {
     const currentPlace = flyPlace.index;
     if (e.keyCode !== 39 && e.keyCode !== 37 && e.keyCode !== 32) return;
     if (e.keyCode === 39) {
-      muchaSound();
-      return setFlyPlace({...points[currentPlace <= 0 ? points.length - 1 : currentPlace - 1]});
+      goLeft(currentPlace);
+      return;
     }
     if (e.keyCode === 37) {
-      muchaSound();
-      return setFlyPlace({...points[(currentPlace + 1) >= points.length ? 0 : currentPlace + 1]});
+      goRight(currentPlace);
+      return;
     }
     if (e.keyCode === 32) {
-      if (currentPlace === spiderPlace.index) {
-        handleSpiderEat();
-        return;
-      }
-      if (currentPlace === pooPlace.index) {
-        handleEat(pooPlace.index);
-      } else {
-        console.log('nothing to eat');
-      }
+      
+      
+      handleEat(pooPlace.index);
     }
   }
 
@@ -78,6 +87,9 @@ const Game = ({points, setState, score, setScore}) => {
   });
 
   useEffect(() => {
+    if (time <= 0) {
+      setState('end')
+    }
     time > 0 && setTimeout(() => setTime(time - 1), 1000);
   }, [time]);
 
@@ -95,6 +107,9 @@ const Game = ({points, setState, score, setScore}) => {
         <Poo x={pooPlace.x} y={pooPlace.y} scale={pooPlace.scale} src={poo} />
         <Spider x={spiderPlace.x} y={spiderPlace.y} scale={spiderPlace.scale} src={spider} />
       </Level>
+      <Btn onClick={() => {goLeft(flyPlace.index)}}>left</Btn>
+      <Btn onClick={() => {handleEat(pooPlace.index)}} eat>eat</Btn>
+      <Btn onClick={() => {goRight(flyPlace.index)}} right>right</Btn>
     </Wrapper>
   )
 }

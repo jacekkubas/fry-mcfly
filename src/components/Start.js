@@ -11,6 +11,22 @@ const Wrapper = styled.div`
   text-align: center;
   width: 100vw;
   height: 100vh;
+  
+  h1 {
+    line-height: 1.2;
+
+    @media screen and (max-width: 767px) {
+      font-size: 30px;
+    }
+  }
+
+  h4 {
+    line-height: 1.2;
+
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
 `;
 
 const Start = ({setState}) => {

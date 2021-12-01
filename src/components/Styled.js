@@ -5,17 +5,33 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+
+  @media screen and (max-width: 1000px){
+    height: 100vh;
+    background: #000;
+  }
 `;
 
 export const Level = styled.div`
   position: relative;
-  background: red;
   width: 800px;
+  max-width: 100%;
+
+  @media screen and (max-width: 1000px){
+    height: calc(100vh - 70px);
+  }
 `;
 
 export const Img = styled.img`
   max-width: 100%;
   display: block;
+
+  @media screen and (max-width: 1000px){
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const Point = styled.div`
@@ -73,4 +89,24 @@ export const Timer = styled.div`
   font-size: 40px;
   color: #fff;
   line-height: 1;
+`;
+
+export const Btn = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: ${({right}) => right ? 'calc(100% - 80px)' : '20px'};
+  width: 70px;
+  height: 50px;
+  background-color: rgba(255,255,255, 0.2);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  box-sizing: border-box;
+  ${({eat}) => eat ? 'left: 50%; transform: translateX(-50%);' : ''};
+
+  @media screen and (max-width: 1000px){
+    display: flex;
+  }
 `;
